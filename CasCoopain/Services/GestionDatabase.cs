@@ -70,6 +70,12 @@ namespace CasCoopain.Services
                     await Database.CreateTablesAsync(CreateFlags.None, typeof(TypePrestation)).ConfigureAwait(false);
 
                 }
+                if (!Database.TableMappings.Any(m => m.MappedType.Name == typeof(Visiter).Name))
+                {
+
+                    await Database.CreateTablesAsync(CreateFlags.None, typeof(Visiter)).ConfigureAwait(false);
+
+                }
 
 
 

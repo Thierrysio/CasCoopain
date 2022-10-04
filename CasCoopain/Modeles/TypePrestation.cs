@@ -1,4 +1,6 @@
-﻿using SQLite;
+﻿
+using SQLite;
+using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,7 @@ namespace CasCoopain.Modeles
         private int _id;
         private String _libelle;
         private float _prixForfaitaire;
+        private List<PrestationVisite> _lesPrestationsVisites;
 
         #endregion
 
@@ -32,6 +35,8 @@ namespace CasCoopain.Modeles
         public int Id { get => _id; set => _id = value; }
         public string Libelle { get => _libelle; set => _libelle = value; }
         public float PrixForfaitaire { get => _prixForfaitaire; set => _prixForfaitaire = value; }
+        [OneToMany]
+        public List<PrestationVisite> LesPrestationsVisites { get => _lesPrestationsVisites; set => _lesPrestationsVisites = value; }
 
         #endregion
 
@@ -40,9 +45,14 @@ namespace CasCoopain.Modeles
         {
             this.Libelle = libelle;
             this.PrixForfaitaire = prixForfaitaire;
+            this.LesPrestationsVisites = new List<PrestationVisite>();
 
             return this;
 
+        }
+        public void AjoutunePrestationVisite(PrestationVisite unePrestationVisite)
+        {
+            this.LesPrestationsVisites.Add(unePrestationVisite);
         }
 
         #endregion

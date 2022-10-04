@@ -43,19 +43,20 @@ namespace CasCoopain.Modeles
         public Inseminateur LeInseminateur { get => _leInseminateur; set => _leInseminateur = value; }
         
         [ManyToMany(typeof(Visiter))]
-
         public List<Visite> LesVisites { get => _lesVisites; set => _lesVisites = value; }
 
         #endregion
 
         #region Methodes
 
-        public void AjoutUneTournee(DateTime date,int kmsRealises,Inseminateur leInseminateur)
+        public Tournee AjoutUneTournee(DateTime date,int kmsRealises,Inseminateur leInseminateur)
         {
             this.LeInseminateur = leInseminateur;
             this.LesVisites = new List<Visite>();
             this.Date = date;
             this.KmRealises = kmsRealises;
+
+            return this;
 
         }
 

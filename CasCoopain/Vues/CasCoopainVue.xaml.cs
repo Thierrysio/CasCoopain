@@ -19,11 +19,18 @@ public partial class CasCoopainVue : ContentPage
         Inseminateur I1 = new Inseminateur().AjoutInseminateur("inseminateur 01", "prenom 01", "0654254794", "tlg", "pwd");
         await App.Database.SaveItemAsync<Inseminateur>(I1);
 
+        Tournee T1 = new Tournee().AjoutUneTournee(new DateTime(2022, 10, 04), 50, I1);
+        await App.Database.SaveItemAsync<Tournee>(T1);
+
+
         await App.Database.MiseAJourItemRelation(I1);
+        await App.Database.MiseAJourItemRelation(T1);
 
-
-        ///Act - agir1);
-        var mDB = App.Database.GetItemAvecRelations<Inseminateur>(I1);
+        ///Act - agir1;
+        var mDB = App.Database.GetItemAvecRelations<Tournee>(T1);
         var resultat = mDB.Result;
+
+        var mDBSR = App.Database.GetItemAsync<Inseminateur>(T1.Id);
+        var resultat2 = mDBSR.Result;
     }
 }
